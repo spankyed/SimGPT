@@ -13,3 +13,7 @@ canvas {
   outline: none;
   /* border: 1px solid grey;	 */
 }
+
+#scene-explorer-host, #inspector-host {
+  position: absolute !important;
+}

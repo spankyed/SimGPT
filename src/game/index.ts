@@ -54,7 +54,7 @@ const onSceneReady = async (scene: Scene) => {
   // // Default intensity is 1. Let's dim the light a small amount
   light.intensity = 0.7;
 
-  const dinnerLampPos = new Vector3(69.75862121582031, 18.166, -65.30058288574219);
+  const dinnerLampPos   = new Vector3(74.76, 18.19, -46.84);
   
   // const lightDining = new SpotLight(
   //   "light", 
@@ -84,6 +84,7 @@ const onSceneReady = async (scene: Scene) => {
   scene.shadowsEnabled = true;
 
   await loadMeshes(scene, () => enableShadows(spotLight, scene));
+  scene.debugLayer.show();
 
   // const gizmoManager = new GizmoManager(scene);
 
@@ -92,11 +93,10 @@ const onSceneReady = async (scene: Scene) => {
   // gizmoManager.usePointerToAttachGizmos = false;
 
   const navmesh = scene.getMeshByName("Navmesh");
-  const navigation = setupNavigation(navmesh);
-  console.log('navigation: ', navigation);
+  // const navigation = setupNavigation(navmesh);
+  // console.log('navigation: ', navigation);
 
   // const path = getPath(navigation, playerPos, destination);
-  scene.debugLayer.show();
 };
 
 /**
@@ -134,6 +134,13 @@ function enableShadows(light: IShadowLight, scene: Scene){
 
 
 function loadMeshes1(scene: any, callback?: any) {
+  const files = {
+    root: "./assets/",
+    house: "house_low_A_roofed.babylon",
+    player: "ej_A_2.glb",
+    navmesh: "navmesh_A.babylon",
+  }
+
   const assetsManager = new AssetsManager(scene);
   const meshTask = assetsManager.addMeshTask("main_task", "", "./assets/", "house_low_A_roofed.babylon");
   meshTask.onSuccess = function (task) {
@@ -146,32 +153,39 @@ function loadMeshes1(scene: any, callback?: any) {
 }
 
 async function loadMeshes(scene: any, callback?: any) {
+  const files = {
+    root: "./assets/",
+    house: "house_a_min.babylon",
+    player: "ej_A_2.glb",
+    nav: "nav_a_min.babylon",
+  }
   // const assetsManager = new AssetsManager(scene);
   // ! async blocking
   const { meshes: playerMeshes } = await SceneLoader.ImportMeshAsync(
     "",
-    "./assets/",
-    "ej_A_2.glb",
+    files.root,
+    files.player,
     scene
   );
+
   playerMeshes.forEach((mesh: any) => {
-    const playerPosition = new Vector3(100, 0, -45);
+    const playerPosition = new Vector3(50, 0, 0);
     mesh.position = playerPosition;
   });
 
 
-  // await SceneLoader.ImportMeshAsync(
-  //   "",
-  //   "./assets/",
-  //   "navmesh_A.babylon",
-  //   scene
-  // );
+  await SceneLoader.ImportMeshAsync(
+    "",
+    files.root,
+    files.nav,
+    scene
+  );
 
   const { meshes } = await SceneLoader.ImportMeshAsync(
     "",
-    "./assets/",
+    files.root,
+    files.house,
     // "LightingScene.glb"
-    "house_low_A_roofed.babylon",
     scene
   );
 
