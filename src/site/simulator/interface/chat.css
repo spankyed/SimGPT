@@ -1,0 +1,90 @@
+.chat { 
+  z-index: 9999;
+  position: absolute;
+  bottom: 3%;
+  width: 30%;
+  height: 50%;
+  background-color: #f8f8f8;
+  opacity:0.7;
+  border: 1px solid #CCC;
+  overflow: hidden;
+  /* margin: 0 auto; 
+  left: 0px;*/
+  right: 15px;
+
+}
+.chat-window { 
+  overflow: scroll;
+  overflow-x: hidden;
+  padding: 10px 10px;
+  height: 85%;
+  transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+}
+.chat-footer { 
+  bottom: 0;
+  position: relative;
+  width: 100%;
+  height:15%;
+  /*background-color: #f8f8f8;*/
+  padding: 3px 3px;
+  background-color: #000000;
+}
+.chat-footer .input-wrapper { 
+  display: inline-block;
+  height: 40px;
+  border-radius: 5px;
+  /*border: 2px solid rgba(16, 93, 146, 1);*/
+  width: 100%;
+  position: relative;
+  padding: 0 20px;
+}
+.chat-footer .input-wrapper .chat-input {
+  position: absolute;
+  top: 5%;
+  height: 90%;
+  width: calc(100% - 40px);
+  border: none;
+  box-sizing: border-box;
+  outline-width: 0;
+  background-color: #f8f8f8;
+  /*background: rgba(0, 0, 0, 0.3);*/
+  padding: 0.9em;
+}
+
+/* Chat containers */
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* Darker chat container */
+.dark {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+/* Clear floats */
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Style images */
+.container img {
+  float: left;
+  max-width: 40px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+/* Style the right image */
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
