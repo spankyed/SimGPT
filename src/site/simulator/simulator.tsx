@@ -10,13 +10,12 @@ export default function Simulator() {
   const user = useLoaderData() as User[];
   console.log('user: ', user);
 
-
   return (
-      <>  
+    <>  
       <div className="simulator">
         <NewPlayer />
-        <Scene />
         <Interface />
+        <Scene />
       </div>
     </>
   );

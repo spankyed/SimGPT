@@ -1,29 +1,37 @@
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { Engine, Scene } from "@babylonjs/core";
-import { onRender, onSceneReady } from "../../game";
+import CreateGame, { GameContext } from "../../game/main";
 
-function Component({ antialias, engineOptions, adaptToDeviceRatio, sceneOptions, onRender, onSceneReady, ...rest } : any) {
+export default memo(({ antialias, engineOptions, adaptToDeviceRatio, onSceneReady, onRender, sceneOptions, ...rest } : any) => {
   const reactCanvas = useRef(null);
 
-  // set up basic engine and scene
+  const prepare = (context: GameContext) => {
+    const { scene, engine } = context;
+
+    const gameService = CreateGame(onRender);
+
+    gameService.send('PREPARE', context);
+
+    if (typeof onSceneReady === "function") onSceneReady(scene, engine);
+
+    window.scene = scene;
+    window.gameService = gameService;
+  };
+
   useEffect(() => {
     const { current: canvas } = reactCanvas;
 
     if (!canvas) return;
-
+    
+    // set up basic engine and scene
     const engine = new Engine(canvas, antialias, engineOptions, adaptToDeviceRatio);
     const scene = new Scene(engine, sceneOptions);
 
     if (scene.isReady()) {
-      onSceneReady(scene);
+      prepare({ scene, engine });
     } else {
-      scene.onReadyObservable.addOnce((scene) => onSceneReady(scene));
+      scene.onReadyObservable.addOnce((scene) => prepare({ scene, engine }));
     }
-
-    engine.runRenderLoop(() => {
-      if (typeof onRender === "function") onRender(scene);
-      scene.render();
-    });
 
     const resize = () => {
       scene.getEngine().resize();
@@ -42,14 +50,9 @@ function Component({ antialias, engineOptions, adaptToDeviceRatio, sceneOptions,
     };
   }, [antialias, engineOptions, adaptToDeviceRatio, sceneOptions, onRender, onSceneReady]);
 
-  return <canvas ref={reactCanvas} {...rest} />;
-};
-
-
-export default ({}: any) => {
   return (
     <>
-      <Component antialias onSceneReady={onSceneReady} onRender={onRender} id="sim-canvas" />
+      <canvas ref={reactCanvas} {...rest} />
     </>
   );
-}
+});

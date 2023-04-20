@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "xstate typegen \"./src/**/*.ts?(x)\""
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
@@ -26,7 +27,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.40.0",
     "react-router-dom": "^6.5.0",
-    "recast-detour": "^1.6.1"
+    "recast-detour": "^1.6.1",
+    "xstate": "^4.37.1"
   },
   "devDependencies": {
     "@babylonjs/inspector": "^5.57.0",
