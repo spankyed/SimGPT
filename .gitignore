@@ -1,5 +1,7 @@
 node_modules/
 public/
 assets/
-.DS_Store
+*.DS_Store
 *.typegen.ts
+.vscode
+.idea

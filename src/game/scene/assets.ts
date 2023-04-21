@@ -13,7 +13,7 @@ const root = './assets/';
 const assets = [
   ['house', 'house_a_min.babylon'],
   ['player', 'ej_A_2.glb'],
-  ['nav', 'nav_a_min.babylon'],
+  // ['nav', 'nav_a_min.babylon'],
 ]
 
 const AssetsSchema = assets.reduce((dic, [name, fileName]) => ({

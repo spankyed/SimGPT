@@ -2,6 +2,13 @@ import { memo, useEffect, useRef } from "react";
 import { Engine, Scene } from "@babylonjs/core";
 import CreateGame, { GameContext } from "../../game/main";
 
+declare global {
+  interface Window {
+    scene: Scene | undefined;
+    gameService: ReturnType<typeof CreateGame>;
+  }
+}
+
 export default memo(({ antialias, engineOptions, adaptToDeviceRatio, onSceneReady, onRender, sceneOptions, ...rest } : any) => {
   const reactCanvas = useRef(null);
 

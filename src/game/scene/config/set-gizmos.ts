@@ -14,8 +14,8 @@ export function setGizmos(customLight: Light, scene: Scene): void {
   const gizmoManager = new GizmoManager(scene);
   gizmoManager.positionGizmoEnabled = true;
   gizmoManager.rotationGizmoEnabled = true;
-  // gizmoManager.usePointerToAttachGizmos = true;
-  gizmoManager.usePointerToAttachGizmos = false;
+  gizmoManager.usePointerToAttachGizmos = true;
+  // gizmoManager.usePointerToAttachGizmos = false;
   gizmoManager.attachToMesh(lightGizmo.attachedMesh);
 }
 
