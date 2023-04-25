@@ -1,4 +1,5 @@
 node_modules/
+code-examples/
 public/
 assets/
 *.DS_Store
