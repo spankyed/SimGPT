@@ -1,14 +1,13 @@
 import { System, World } from '~/game/ecs/world/utils/types';
 
-export function behavior(): System {
+export function userInterface(): System {
   return {
-    name: 'behavior',
+    name: 'userInterface',
     requirements: [],
     entities: new Set<string>(),
     events: {},
-    create: ()=>{},
     update: (world: World, entity: Entity) => {
-      // set behavior info (higher level events) for interface to display
+      // show events for characters at top of screen
     }
   }
 }

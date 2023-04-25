@@ -1,4 +1,4 @@
-import { World } from "../world/utils/types";
+import { World } from "~/game/ecs/world/utils/types";
 
 interface NavMeshTags {
   mesh?: string;

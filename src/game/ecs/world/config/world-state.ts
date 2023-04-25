@@ -36,12 +36,30 @@ export default {
     {
       id: 'dining-room-light',
       type: 'light',
-      light: 'light1',
+      light: {
+        type: 'spot',
+        args: [
+          'dining-room-light',
+          [74.76, 18.19, -46.84],
+          [0, -1, 0],
+          Math.PI,
+          10,
+        ],
+        options: {
+          intensity: 100,
+        }
+      }
     },
     {
       id: 'hemispheric-light',
       type: 'light',
-      light: 'light1',
+      light: {
+        type: 'spot',
+        args: ["light", [0, 1, 0]],
+        options: {
+          intensity: .7,
+        }
+      }
     },
   ]
 }

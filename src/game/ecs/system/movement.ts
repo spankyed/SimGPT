@@ -1,37 +1,38 @@
-import { Navigation, setupNavigation } from 'src/game/scene/config/set-navigation';
-import { World } from '../utils/ecs';
-import { Entity } from '../world/config/world-state';
+import { Navigation, setNavigation } from '~/game/scene/config/set-navigation';
 import { Scene, Vector3 } from '@babylonjs/core';
-// import { WorldEvent } from '../world/utils/types';
+import { EntityId, System, World } from '~/game/ecs/world/utils/types';
+import { sendEvent } from '~/game/ecs/world/utils';
 
-export function movement() {
+export function movement(): System {
   let navigation: Navigation | null = null;
 
   return {
     name: 'movement',
     requirements: [],
-    entities: [],
+    entities: new Set<string>(),
     create: (world: World) => {
       // const navEntity = findFirst('Navmesh', world);
-      navigation = setupNavigation(world.scene.getMeshByName('Navmesh'));
+      navigation = setNavigation(world.scene.getMeshByName('Navmesh'));
     },
     // move to clicked coordinates then stop entity
-    update: (world: World, entity: Entity) => {
+    update: (world: World, id: EntityId) => {
       // const path = entity.get('path');
+      const entity = world.entities[id];
+
       const hasPath = entity.path && entity.path.length > 0;
 
       if (!hasPath) {
         const path = getPath(navigation, entity.mesh.position, entity.destination);
 
-        world.send('SET_PATH', { entity, path });
+        sendEvent(world, 'SET_PATH', { entity, path });
 
         if (path.length > 0) {
-          world.send('SET_DESTINATION', { entity, destination: path[0] });
+          sendEvent(world, 'SET_DESTINATION', { entity, destination: path[0] });
         }
       } else {
         const events = getMoveEvents(entity);
 
-        events.forEach(([name, data]) => world.send(name, data));
+        events.forEach(([name, data]) => sendEvent(world, name, data));
       }
     },
     events: {

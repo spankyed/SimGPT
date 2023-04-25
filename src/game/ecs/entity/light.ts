@@ -1,11 +1,19 @@
 import { Scene } from '@babylonjs/core';
-import { World } from '../utils/ecs';
+import { createEntity, addComponent } from '~/game/ecs/world/utils';
+import { World } from '~/game/ecs/world/utils/types';
+import { setLight } from '~/game/scene/config';
 
 interface LightTags {
-
+  light: {
+    type: string;
+    args: any[];
+    options: {
+      [key: string]: any;
+    };
+  }; // light constructor args
 }
 
-export function light(world: World, scene: Scene, tags: CharacterTags = {}) {
+export function light(world: World, scene: Scene, tags: LightTags) {
   const light = createEntity(world);
   
   // world.addComponent(light, 'needs', {
@@ -20,11 +28,12 @@ export function light(world: World, scene: Scene, tags: CharacterTags = {}) {
   //   current: 'idle',
   //   target: null
   // });
-  
-  addComponent(world, light, 'mesh', {
-    current: 'idle',
-    target: null
-  });
+
+  const sceneLight = setLight(world.scene, tags.light.type, tags.light.args);
+
+  if (sceneLight) {
+    addComponent(world, light, 'light', sceneLight);
+  }
   
   return light;
 }

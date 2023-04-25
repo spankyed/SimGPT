@@ -1,9 +1,10 @@
-import { System } from '../world/utils';
+import { System, World } from '~/game/ecs/world/utils/types';
 
-export function interactions(): System {
+export function mesh(): System {
   return {
+    name: 'mesh',
     requirements: [],
-    entities: [],
+    entities: new Set<string>(),
     events: {},
     update: (world: World, entity: Entity) => {
       const interactions = world.getComponent(entity, 'interactions');

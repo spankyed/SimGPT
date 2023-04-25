@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef } from "react";
 import { Engine, Scene } from "@babylonjs/core";
-import CreateGame, { GameContext } from "../../game/main";
+import CreateGame, { GameContext } from "~/game/main";
 
 declare global {
   interface Window {

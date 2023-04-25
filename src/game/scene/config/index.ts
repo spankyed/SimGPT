@@ -5,6 +5,8 @@ import { setLight } from "./set-light";
 import { setShadows } from "./set-shadows";
 import { setSkybox } from "./set-skybox";
 import { setPositions } from './set-positions';
+import { setDataProps } from "./set-data-props";
+import { setNavigation } from "./set-navigation";
 
 export {
   setCamera,
@@ -13,5 +15,7 @@ export {
   setShadows,
   loadAssets,
   setSkybox,
-  setPositions
+  setPositions,
+  setDataProps,
+  setNavigation,
 }

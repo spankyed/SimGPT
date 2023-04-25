@@ -14,7 +14,7 @@ export interface Navigation {
   findPath: Function;
 }
 
-export function setupNavigation(navMesh: any) {
+export function setNavigation(navMesh: any) {
   console.log('Navigation: ', Navigation);
   let navigation = new Navigation() as Navigation;
   let zoneNodes = navigation.buildNodes(navMesh);

@@ -1,6 +1,5 @@
-import { character } from './character';
+import { movement } from './movement';
+
 export default [
-  character,
-  camera,
-  light,
+  movement,
 ]

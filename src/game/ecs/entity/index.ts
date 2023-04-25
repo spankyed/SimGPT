@@ -7,5 +7,5 @@ export default {
   character,
   camera,
   light,
-  navMesh,
+  // navMesh,
 }

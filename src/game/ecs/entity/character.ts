@@ -1,8 +1,11 @@
-import { World, createEntity, addComponent } from "../world/utils";
+import { setDataProps } from "~/game/scene/config";
+import { createEntity, addComponent } from "~/game/ecs/world/utils";
+import { Vector3 } from "@babylonjs/core";
+import { World } from "~/game/ecs/world/utils/types";
 
 interface CharacterTags {
   mesh?: string;
-
+  position?: [number, number, number];
 }
 
 export function character(world: World, tags: CharacterTags = {}) {
@@ -11,6 +14,11 @@ export function character(world: World, tags: CharacterTags = {}) {
   const mesh = world.scene.getMeshByName(tags.mesh || '');
 
   if (mesh){
+    setDataProps(mesh, {
+      position: new Vector3(...(tags.position || [0, 0, 0])),
+    })
+
+    
     addComponent(world, character, 'mesh', mesh);
   }
   
