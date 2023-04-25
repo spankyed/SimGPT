@@ -15,7 +15,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     
-    "baseUrl": ".",
+    // "baseUrl": ".",
     "importHelpers": true,
     "lib": [
       "es2019",
@@ -27,12 +27,24 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noEmitOnError": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": ["./*"],
+      "src": [
+        "src"
+      ],
+      "src/*": [
+        "src/*"
+      ],
+      "game": [
+        "./src/game/"
+      ],
+      "game/*": [
+        "./src/game/*"
+      ],
+    },
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }],
-  "paths": {
-    "game": [
-      "./src/game/"
-    ],
-  }
+
 }
