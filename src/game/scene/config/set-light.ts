@@ -5,8 +5,9 @@ import {
   Vector3,
   HemisphericLight,
 } from "@babylonjs/core";
+import { setShadows } from "./set-shadows";
 
-export function setLights(scene: Scene) {
+export function setLight(scene: Scene) {
   // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
   const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
   light.intensity = 0.7;
@@ -31,5 +32,8 @@ export function setLights(scene: Scene) {
   );
   spotLight.intensity = 100;
   // createGizmos(lightDining, scene);
+
+  setShadows(spotLight, scene)
+  
   return { spotLight}
 }
