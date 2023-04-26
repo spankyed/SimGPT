@@ -25,8 +25,19 @@ const lightTypes = {
   spot: SpotLight,
 }
 
-export function setLight<T>(scene: Scene, type: string, args: any[], options: any = {}) {
-  const light = new lightTypes[type](...args, scene);
+export function setLight<T>(scene: Scene, lightData: { type: string, args: any[], options: any }) {
+  const { type, args, options } = lightData;
+
+  const toVector3 = (args: any) => {
+    return args.map((arg: any) => {
+      if (Array.isArray(arg) && arg.length === 3) {
+        return new Vector3(...arg);
+      }
+      return arg;
+    })
+  }
+
+  const light = new lightTypes[type](...toVector3(args), scene);
 
   setDataProps(light, options)
 

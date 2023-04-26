@@ -3,23 +3,25 @@ import { Scene, Vector3 } from '@babylonjs/core';
 import { EntityId, System, World } from '~/game/ecs/world/utils/types';
 import { sendEvent } from '~/game/ecs/world/utils';
 
-export function movement(): System {
+export function movementSystem(): System {
   let navigation: Navigation | null = null;
 
   return {
     name: 'movement',
     requirements: [],
-    entities: new Set<string>(),
+    entityRefs: new Set<string>(),
     create: (world: World) => {
       // const navEntity = findFirst('Navmesh', world);
       navigation = setNavigation(world.scene.getMeshByName('Navmesh'));
     },
     // move to clicked coordinates then stop entity
     update: (world: World, id: EntityId) => {
+      return false;
+      console.log('id: ', id);
       // const path = entity.get('path');
       const entity = world.entities[id];
 
-      const hasPath = entity.path && entity.path.length > 0;
+      const hasPath = entity?.path && entity.path.length > 0;
 
       if (!hasPath) {
         const path = getPath(navigation, entity.mesh.position, entity.destination);

@@ -2,7 +2,7 @@
 import "@babylonjs/inspector";
 import "@babylonjs/core/Debug/debugLayer";
 import { AbstractAssetTask, Scene, Vector3 } from "@babylonjs/core";
-import { loadAssets, setSkybox } from "./config";
+import { loadAssets, setFog, setSkybox } from "./config";
 import AssetsSchema from "./assets";
 
 const prepareScene = async (scene: Scene, callback: Function) => {
@@ -11,7 +11,9 @@ const prepareScene = async (scene: Scene, callback: Function) => {
     console.log("All assets loaded");
   });
 
-  // setSkybox(scene);
+  // setFog(scene);
+
+  setSkybox(scene);
 
   // setCamera(scene, PositionSchema.mainCamera);
 

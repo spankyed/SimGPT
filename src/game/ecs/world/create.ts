@@ -3,7 +3,7 @@ import { EntityId, System, TagMap, World } from "./utils/types";
 import WorldState from "./config/world-state";
 import Entities from "../entity";
 import Systems from "../system";
-import { registerSystem } from "./utils";
+import { registerSystem, update } from "./utils";
 
 export default function createWorld(scene): World {
   const world: World = {
@@ -11,6 +11,7 @@ export default function createWorld(scene): World {
     entities: new Map<EntityId, TagMap>(),
     systems: new Set<System>(),
     eventQueue: [],
+    update: () => update(world),
   };
 
   const defaultEntities = WorldState.entities;
@@ -18,7 +19,7 @@ export default function createWorld(scene): World {
 
   // create entities
   defaultEntities.forEach(entity => {
-    const entityFactory = Entities[entity.type];
+    const entityFactory = Entities[entity.factory];
 
     if (entityFactory) {
       entityFactory(world, entity);

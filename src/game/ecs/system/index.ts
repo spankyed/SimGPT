@@ -1,5 +1,7 @@
-import { movement } from './movement';
+import { cameraSystem } from './camera';
+import { movementSystem } from './movement';
 
 export default [
-  movement,
+  movementSystem,
+  cameraSystem,
 ]

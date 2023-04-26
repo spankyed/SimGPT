@@ -4,7 +4,7 @@ export function behavior(): System {
   return {
     name: 'behavior',
     requirements: [],
-    entities: new Set<string>(),
+    entityRefs: new Set<string>(),
     events: {},
     create: ()=>{},
     update: (world: World, entity: Entity) => {

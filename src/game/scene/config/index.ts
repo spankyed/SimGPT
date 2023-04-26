@@ -7,6 +7,7 @@ import { setSkybox } from "./set-skybox";
 import { setPositions } from './set-positions';
 import { setDataProps } from "./set-data-props";
 import { setNavigation } from "./set-navigation";
+import { setFog } from './set-fog';
 
 export {
   setCamera,
@@ -18,4 +19,5 @@ export {
   setPositions,
   setDataProps,
   setNavigation,
+  setFog
 }

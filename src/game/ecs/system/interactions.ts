@@ -4,7 +4,7 @@ export function interactions(): System {
   return {
     name: 'interactions',
     requirements: [],
-    entities: new Set<string>(),
+    entityRefs: new Set<string>(),
     events: {},
     update: (world: World, entity: Entity) => {
       const interactions = world.getComponent(entity, 'interactions');

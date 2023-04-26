@@ -1,33 +1,31 @@
-import { Scene } from '@babylonjs/core';
-import { World } from '../utils/ecs';
+import { Scene, Vector3 } from '@babylonjs/core';
+import { createEntity, addComponent } from '../world/utils';
+import { World } from '../world/utils/types';
+import { setCamera, setDataProps } from '~/game/scene/config';
+import { mesh } from '../system/mesh';
 
 interface CameraTags {
-
+  camera: {
+    type: string;
+    args: any[];
+    options: {
+      [key: string]: any;
+    };
+  }
 }
 
-export function camera(world: World, scene: Scene, tags: CharacterTags = {}) {
+export function camera(world: World, tags: CameraTags) {
   const camera = createEntity(world);
 
-  if (entity.mesh) {
-    entity.mesh = scene.getMeshByName(entity.mesh) || null;
-  }
-  // world.addComponent(camera, 'needs', {
-  //   hunger: 100,
-  //   energy: 100,
-  //   hygiene: 100,
-  //   social: 100,
-  //   fun: 100
-  // });
+  // const canvas = world.scene.getEngine().getRenderingCanvas();
+  // tags.camera.options.attachControl = [canvas, true]
+  // const sceneCamera = setCamera(world.scene, tags.camera.type, tags.camera.args);
 
-  // world.addComponent(camera, 'behavior', {
-  //   current: 'idle',
-  //   target: null
-  // });
-  
-  addComponent(world, camera, 'mesh', {
-    current: 'idle',
-    target: null
-  });
+  // if (sceneCamera) {
+  // }
+
+  addComponent(world, camera, 'camera', false);
+  addComponent(world, camera, 'init', tags.camera);
   
   return camera;
 }

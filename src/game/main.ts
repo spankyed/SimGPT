@@ -55,6 +55,7 @@ export default function createGame(onRender: any) {
               prepareScene(scene!, () => {
                 // const { meshes, lights, cameras} = context;
                 const world = createWorld(scene);
+
                 callback({ type: 'RUN', world });
               });
               

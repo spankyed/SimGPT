@@ -13,7 +13,7 @@ interface LightTags {
   }; // light constructor args
 }
 
-export function light(world: World, scene: Scene, tags: LightTags) {
+export function light(world: World, tags: LightTags) {
   const light = createEntity(world);
   
   // world.addComponent(light, 'needs', {
@@ -29,7 +29,7 @@ export function light(world: World, scene: Scene, tags: LightTags) {
   //   target: null
   // });
 
-  const sceneLight = setLight(world.scene, tags.light.type, tags.light.args);
+  const sceneLight = setLight(world.scene, tags.light);
 
   if (sceneLight) {
     addComponent(world, light, 'light', sceneLight);

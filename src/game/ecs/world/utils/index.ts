@@ -15,7 +15,7 @@ function destroyEntity(world: World, id: EntityId): void {
   world.entities.delete(id);
 
   for (const system of world.systems) {
-    system.entities.delete(id);
+    system.entityRefs.delete(id);
   }
 }
 
@@ -57,10 +57,10 @@ function updateMatchedEntities(world: World, id: EntityId, remove?: boolean): vo
   for (const system of world.systems) {
     const requirements = system.requirements;
 
-    if (remove && system.entities.has(id)) {
-      system.entities.delete(id);
+    if (remove && system.entityRefs.has(id)) {
+      system.entityRefs.delete(id);
     } else if (requirementsMatchEntity(requirements, world.entities.get(id))) {
-      system.entities.add(id);
+      system.entityRefs.add(id);
     }  
   }
 }
@@ -90,11 +90,11 @@ function registerSystem(world: World, system: System): void {
 
   for (const id of world.entities.keys()) {
     if (requirementsMatchEntity(system.requirements, world.entities.get(id))) {
-      system.entities.add(id);
+      system.entityRefs.add(id);
     }
   }
 
-  return system.create?.(world);
+  return system.create?.(world, system.entityRefs);
 }
 
 function sendEvent(world: World, name: string, data: Data) {
@@ -113,8 +113,8 @@ function update(world: World): void {
       }
     }
     
-    for (const entity of system.entities) {
-      system.update?.(world, entity);
+    for (const ref of system.entityRefs) {
+      system.update?.(world, ref);
     }
   }
 }
